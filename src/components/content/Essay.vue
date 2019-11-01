@@ -34,12 +34,12 @@
 
 <script>
 export default {
-   name: 'Essay',
-   data () {
-      return {
-        imgUrl: '../../../static/imgs/avlt.png'   
-      }
-   }
+  name: 'Essay',
+  data () {
+    return {
+      imgUrl: '../../../static/imgs/avlt.png'
+    }
+  }
 }
 </script>
 

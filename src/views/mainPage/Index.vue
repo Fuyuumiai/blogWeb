@@ -30,7 +30,7 @@ export default {
   data () {
     return {
       activateNum: 0,
-      imgUrl: '../../../static/imgs/avlt.png',
+      imgUrl: '../../../static/imgs/avlt.png'
     }
   },
   methods: {

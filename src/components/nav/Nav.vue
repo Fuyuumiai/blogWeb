@@ -59,7 +59,7 @@ export default {
       font-size: 1.6em;
       letter-spacing: 1px;
       line-height: 65px;
-      
+
   }
   .group-item {
       height: 100%;

@@ -19,7 +19,7 @@
 <script>
 import Nav from '../../components/nav/Nav'
 import Palette from '../../components/content/Palette'
-import Aggregate from'../../components/content/Aggregate'
+import Aggregate from '../../components/content/Aggregate'
 export default {
   name: 'Quantity',
   components: {

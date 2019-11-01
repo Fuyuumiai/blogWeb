@@ -10,14 +10,6 @@ export default new Router({
       redirect: '/index'
     },
     {
-      path: '/login',
-      name: 'login',
-      component: resolve => require(['@/views/loginRelevant/Login.vue'], resolve),
-      meta: {
-        title: '登录'
-      }
-    },
-    {
       path: '/index',
       name: 'index',
       component: resolve => require(['@/views/mainPage/Index.vue'], resolve),

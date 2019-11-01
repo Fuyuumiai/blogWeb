@@ -48,11 +48,14 @@
           <Icon type="ios-cafe-outline" size="18" style="vertical-align: -.105em;"></Icon>
           动态栏
         </p>
-          <Timeline :class="[trendsList > 5 ? 'big-box' : '']">
+          <Timeline :class="[trendsList > 5 ? 'big-box' : '']" pending>
             <vue-scroll>
              <TimelineItem v-for="(item, index) in 8" :key="index">
                  <p style="fontWeight: 600">2018-12-15</p>
                  <p>前方的路永远会有更美的风景</p>
+             </TimelineItem>
+             <TimelineItem>
+               <p style="fontWeight: 600">2019-10 开始</p>
              </TimelineItem>
             </vue-scroll>
           </Timeline>
@@ -87,7 +90,7 @@ export default {
   data () {
     return {
       // 标签随机颜色,自定义颜色容易看不清字
-      colorList: ['default', 'magenta', 'red', 'volcano', 'orange', 'gold', 'yellow', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple' ],
+      colorList: [ 'default', 'magenta', 'red', 'volcano', 'orange', 'gold', 'yellow', 'lime', 'green', 'cyan', 'blue', 'geekblue', 'purple' ],
       // 存储句子的字段
       sentence: '愿你走过半生，归来仍是少年。',
       // 存储标签的数组
