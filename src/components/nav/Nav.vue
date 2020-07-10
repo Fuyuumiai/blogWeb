@@ -33,13 +33,19 @@ export default {
   props: {
     activateNum: Number
   },
+  created () {
+    if (!sessionStorage.getItem('page_reload')) {
+      sessionStorage.setItem('page_reload', 1)
+      this.$router.go(0)
+    }
+  },
   data () {
     return {
       menuItemList: [
         {name: '首页', icon: '', path: '/'},
         {name: '归档', icon: '', path: '/quantity'},
-        {name: '动态', icon: '', path: '/'},
-        {name: '关于我', icon: '', path: '/'}
+        {name: '打卡', icon: '', path: '/trends'},
+        {name: '关于我', icon: '', path: '/Me'}
       ],
       transfer: true
     }

@@ -24,6 +24,13 @@ module.exports = {
   entry: {
     app: './src/main.js'
   },
+  // 这里配置CDN引入的内容
+  externals: {
+    'vue':'Vue',
+    'vuex': 'Vuex',
+    'iview': 'iView',
+    'vuescroll': 'vuescroll'
+  },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',

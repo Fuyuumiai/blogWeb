@@ -1,5 +1,11 @@
 <template>
     <div>
+      <Card :bordered="false" style="marigin-bottom: 20px;">
+            <p slot="title">
+              <Icon type="ios-browsers" size="18" style="vertical-align: top;"/> 文章分类
+            </p>
+            <p><b>{{item.name}}</b> 共有 {{list.length}} 篇文章</p>
+      </Card>
       <Row class="article-box" v-for="(item, index) in articleList" :key="index" @click.native="goArticle(item.article_id)">
           <!-- 图片、位于右侧 -->
           <Col span="24" :md="{span: 8, push: 16}">
@@ -46,7 +52,9 @@ export default {
       page: 1,
       // 数据总条数
       len: 0,
-      articleList: []
+      articleList: [],
+      list: [],
+      item: []
     }
   },
   filters: {
@@ -60,15 +68,17 @@ export default {
     next()
   },
   created () {
-    this.page = !sessionStorage.getItem('page') ? 1 : parseInt(sessionStorage.getItem('page'))
     // 初始化博客列表
-    this.getArticle(this.term, this.page, 10)
+    this.item = JSON.parse(this.$route.query.item)
+    this.list = this.item.list
+    this.page = !sessionStorage.getItem('page') ? 1 : parseInt(sessionStorage.getItem('page'))
+    this.getArticle(this.list, this.page, 10)
   },
   methods: {
     // 获取博客
-    getArticle (term, page, num) {
-      this.$apis.getAssignedArticle({
-        term,
+    getArticle (list, page, num) {
+      this.$apis.getArticleList({
+        list,
         page: (page - 1) * 10,
         num,
         simple: true
@@ -77,8 +87,6 @@ export default {
           this.articleList = res.data.data
           this.len = res.data.len
           for (let i = 0; i < this.articleList.length; i++) {
-            // 这里使用JSON.parse方法是因为后端传过来的值是使用JSON.Stringfly方法进行处理过后的数据。
-            // 这里为什么后端要使用JSON.Stringfly方法进行数据处理呢？ 因为如果好像是直接传过来的JSON数据会直接变成一个字符串
             this.articleList[i].body = JSON.parse(this.articleList[i].body)
           }
         } else {
@@ -91,17 +99,16 @@ export default {
     pageChange (page) {
       this.page = page
       sessionStorage.setItem('page', page)
-      this.getArticle(this.term, page, 10)
+      this.getArticle(this.list, page, 10)
     },
     goArticle (id) {
-      this.$Spin.show()
-      this.reload()
       this.$router.push({
         path: '/article',
         query: {
           id
         }
       })
+      this.reload()
     }
   }
 }
@@ -111,6 +118,7 @@ export default {
   .article-box {
     width: 100%;
     height: auto;
+    margin-top: 20px;
     min-height: 170px;
     cursor: pointer;
     background: #fff;
@@ -142,7 +150,6 @@ export default {
         font-size: 1.4em;
         font-weight: 700;
         overflow: hidden;
-        // 这几句大概率会因为标题过长用省略号替代时使响应式布局失效
         letter-spacing: .5px;
         text-overflow: ellipsis;
         white-space: nowrap;

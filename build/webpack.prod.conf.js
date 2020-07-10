@@ -68,6 +68,7 @@ const webpackConfig = merge(baseWebpackConfig, {
         : config.build.index,
       template: 'index.html',
       inject: true,
+      favicon: 'bitbug_favicon.ico',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
